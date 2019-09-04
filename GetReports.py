@@ -53,14 +53,16 @@ def main():
     headers = {
             'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
             }
-    url = 'https://login.izettle.com/login?username=ekonomi.ztyret%40ztek.se'
+    with open('userName', 'r') as content_file:
+        user = content_file.read()
+    user2 = user.replace('@',%40')
+    url = 'https://login.izettle.com/login?username=' + user2
     file =  open('key', 'rb') 
     key = pickle.load(file)
     file =  open('pass', 'rb') 
     token = pickle.load(file)
     f = Fernet(key)
-    file = open('userName','rb')
-    user = pickle.load(file)
+
     login_data = {
         'username': user,
         'password': f.decrypt(token).decode("utf-8"),
