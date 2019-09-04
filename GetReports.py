@@ -59,8 +59,10 @@ def main():
     file =  open('pass', 'rb') 
     token = pickle.load(file)
     f = Fernet(key)
+    file = open('userName','rb')
+    user = pickle.load(file)
     login_data = {
-        'username': 'ekonomi.ztyret@ztek.se',
+        'username': user,
         'password': f.decrypt(token).decode("utf-8"),
         'button':''
     }
